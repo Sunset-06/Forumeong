@@ -3,10 +3,10 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-    "id": "user123",
-    "username": "JohnDoe",
-    "email": "john.doe@example.com",
-    "pfp": "https://example.com/johndoe.jpg",
+    "id": "testid",
+    "username": "testname",
+    "email": "test@email.com",
+    "pfp": "https://test.com/johndoe.jpg",
     "createdAt": {
         "seconds": 1620000000,
         "nanos": 0
