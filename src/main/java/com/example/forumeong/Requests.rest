@@ -1,0 +1,84 @@
+### Test Create User
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+    "id": "testid",
+    "username": "testname",
+    "email": "test@email.com",
+    "pfp": "https://test.com/johndoe.jpg",
+    "createdAt": {
+        "seconds": 1620000000,
+        "nanos": 0
+    },
+    "desc": "A sample user",
+    "postsCount": 0,
+    "threadsCount": 0
+}
+
+### Test Get User By ID
+GET http://localhost:8080/api/users/user123
+
+### Test Get All Users
+GET http://localhost:8080/api/users
+
+### Test Delete User
+DELETE http://localhost:8080/api/users/user123
+
+### Test Create Thread
+POST http://localhost:8080/api/threads
+Content-Type: application/json
+
+{
+    "id": "thread456",
+    "title": "Sample Thread",
+    "authorId": "user123",
+    "authorName": "JohnDoe",
+    "createdAt": {
+        "seconds": 1620000000,
+        "nanos": 0
+    },
+    "updatedAt": {
+        "seconds": 1620000000,
+        "nanos": 0
+    },
+    "category": "General",
+    "postCount": 0,
+    "lastPostAt": {
+        "seconds": 1620000000,
+        "nanos": 0
+    }
+}
+
+### Test Get Thread By ID
+GET http://localhost:8080/api/threads/thread456
+
+### Test Get All Threads
+GET http://localhost:8080/api/threads
+
+### Test Delete Thread
+DELETE http://localhost:8080/api/threads/thread456
+
+### Test Create Post
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+    "id": "post789",
+    "threadId": "thread456",
+    "authorId": "user123",
+    "content": "This is a sample post.",
+    "createdAt": {
+        "seconds": 1620000000,
+        "nanos": 0
+    }
+}
+
+### Test Get Post By ID
+GET http://localhost:8080/api/posts/post789
+
+### Test Get All Posts
+GET http://localhost:8080/api/posts
+
+### Test Delete Post
+DELETE http://localhost:8080/api/posts/post789

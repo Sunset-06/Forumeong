@@ -24,7 +24,6 @@ public class firebaseConfig {
         try (FileInputStream serviceAccount = new FileInputStream(firebasePath)) {
             FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setProjectId(firebaseId)
                 .build();
             
             return FirebaseApp.initializeApp(options);
