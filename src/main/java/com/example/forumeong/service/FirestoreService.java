@@ -18,7 +18,6 @@ public class FirestoreService {
     private static final String Threads = "Threads";
     private static final String Posts= "Posts";
 
-    // CRUD operations for User
 
     public String saveUser(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -52,11 +51,9 @@ public class FirestoreService {
 
     public String deleteUser(String userId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> writeResult = dbFirestore.collection(Users).document(userId).delete();
+        ApiFuture<WriteResult> result = dbFirestore.collection(Users).document(userId).delete();
         return "User with ID " + userId + " has been deleted successfully.";
     }
-
-    // CRUD operations for Thread
 
     public String saveThread(Thread thread) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -90,11 +87,9 @@ public class FirestoreService {
 
     public String deleteThread(String threadId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> writeResult = dbFirestore.collection(Threads).document(threadId).delete();
+        ApiFuture<WriteResult> result = dbFirestore.collection(Threads).document(threadId).delete();
         return "Thread with ID " + threadId + " has been deleted successfully.";
     }
-
-    // CRUD operations for Post
 
     public String savePost(Post post) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -128,7 +123,7 @@ public class FirestoreService {
 
     public String deletePost(String postId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> writeResult = dbFirestore.collection(Posts).document(postId).delete();
+        ApiFuture<WriteResult> result = dbFirestore.collection(Posts).document(postId).delete();
         return "Post with ID " + postId + " has been deleted successfully.";
     }
 }

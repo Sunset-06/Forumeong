@@ -7,10 +7,6 @@ Content-Type: application/json
     "username": "testname",
     "email": "test@email.com",
     "pfp": "https://test.com/johndoe.jpg",
-    "createdAt": {
-        "seconds": 1620000000,
-        "nanos": 0
-    },
     "desc": "A sample user",
     "postsCount": 0,
     "threadsCount": 0

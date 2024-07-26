@@ -13,11 +13,8 @@ import java.io.IOException;
 @Configuration
 public class firebaseConfig {
 
-    @Value("${firebase.path}")
+    @Value("serviceAccountKey.json")
     private String firebasePath;
-
-    @Value("${firebase.id}")
-    private String firebaseId;
 
     @Bean
     public FirebaseApp firebaseApp() throws IOException {

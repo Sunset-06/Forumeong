@@ -1,5 +1,6 @@
 package com.example.forumeong.models;
 
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import com.google.cloud.Timestamp;
 
 public class User {
@@ -7,10 +8,23 @@ public class User {
     private String username;
     private String email;
     private String pfp;
-    private Timestamp createdAt;
+
+    @ServerTimestamp
+    private Timestamp created;
+
     private String desc;
     private int postsCount;
     private int threadsCount;
+
+    public User(String id, String username, String email, String pfp, String desc, int postsCount, int threadsCount) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.pfp = pfp;
+        this.desc = desc;
+        this.postsCount = postsCount;
+        this.threadsCount = threadsCount;
+    }
 
     public String getId() {
         return id;
@@ -44,12 +58,12 @@ public class User {
         this.pfp = pfp;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Timestamp getCreated() {
+        return created;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated(Timestamp created) {
+        this.created = created;
     }
 
     public String getDesc() {
