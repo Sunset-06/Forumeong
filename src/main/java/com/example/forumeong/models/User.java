@@ -6,6 +6,7 @@ import com.google.cloud.Timestamp;
 public class User {
     private String id;
     private String username;
+    private String displayname;
     private String email;
     private String pfp;
 
@@ -16,9 +17,10 @@ public class User {
     private int postsCount;
     private int threadsCount;
 
-    public User(String id, String username, String email, String pfp, String desc, int postsCount, int threadsCount) {
+    public User(String id, String username, String email, String pfp, String desc, int postsCount, int threadsCount, String displayname) {
         this.id = id;
         this.username = username;
+        this.displayname = displayname;
         this.email = email;
         this.pfp = pfp;
         this.desc = desc;
@@ -42,6 +44,13 @@ public class User {
         this.username = username;
     }
 
+    public String getDisplayname() {
+        return displayname;
+    }
+
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
+    }
     public String getEmail() {
         return email;
     }

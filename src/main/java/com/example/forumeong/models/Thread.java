@@ -1,5 +1,6 @@
 package com.example.forumeong.models;
 
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import com.google.cloud.Timestamp;
 
 public class Thread {
@@ -7,11 +8,17 @@ public class Thread {
     private String title;
     private String authorId;
     private String authorName;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+
+    @ServerTimestamp
+    private Timestamp created;
+
+    @ServerTimestamp
+    private Timestamp updated;
     private String category;
     private int postCount;
-    private Timestamp lastPostAt;
+
+    @ServerTimestamp
+    private Timestamp lastPost;
     
     public String getId() {
         return id;
@@ -45,20 +52,20 @@ public class Thread {
         this.authorName = authorName;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Timestamp getCreated() {
+        return created;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated(Timestamp created) {
+        this.created = created;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public Timestamp getUpdated() {
+        return updated;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated(Timestamp updated) {
+        this.updated = updated;
     }
 
     public String getCategory() {
@@ -77,11 +84,11 @@ public class Thread {
         this.postCount = postCount;
     }
 
-    public Timestamp getLastPostAt() {
-        return lastPostAt;
+    public Timestamp getLastPost() {
+        return lastPost;
     }
 
-    public void setLastPostAt(Timestamp lastPostAt) {
-        this.lastPostAt = lastPostAt;
+    public void setLastPost(Timestamp lastPost) {
+        this.lastPost = lastPost;
     }
 }

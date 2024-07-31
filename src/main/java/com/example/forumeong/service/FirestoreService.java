@@ -7,6 +7,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
+import com.google.cloud.Timestamp;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -57,12 +58,16 @@ public class FirestoreService {
 
     public String saveThread(Thread thread) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
+        thread.setId(dbFirestore.collection(Threads).document().getId());
+
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
                 .collection(Threads)
                 .document(thread.getId())
                 .set(thread);
+
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
+
 
     public Thread getThreadById(String threadId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();

@@ -1,4 +1,6 @@
 package com.example.forumeong.models;
+
+import com.google.cloud.firestore.annotation.ServerTimestamp;
 import com.google.cloud.Timestamp;
 
 public class Post {
@@ -6,7 +8,10 @@ public class Post {
     private String threadId;
     private String authorId;
     private String authorName;
-    private Timestamp createdAt;
+
+    @ServerTimestamp
+    private Timestamp created;
+
     private String content;
     private int likes;
 
@@ -42,12 +47,12 @@ public class Post {
         this.authorName = authorName;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Timestamp getCreated() {
+        return created;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated(Timestamp created) {
+        this.created = created;
     }
 
     public String getContent() {
