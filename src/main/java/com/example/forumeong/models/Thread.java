@@ -8,7 +8,6 @@ public class Thread {
     private String title;
     private String authorId;
     private String authorName;
-
     @ServerTimestamp
     private Timestamp created;
 
