@@ -6,6 +6,7 @@ import com.google.cloud.Timestamp;
 public class Thread {
     private String id;
     private String title;
+    private String content;
     private String authorId;
     private String authorName;
     @ServerTimestamp
@@ -33,6 +34,14 @@ public class Thread {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.title = content;
     }
 
     public String getAuthorId() {
