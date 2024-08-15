@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins("http://localhost:5173", "https://localhost:8080")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -23,11 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
 
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
-                registry.addViewController("/{spring:\\w+}")
+                registry.addViewController("/{spring:[^.]*}")
                         .setViewName("forward:/");
-                registry.addViewController("/**/{spring:\\w+}")
-                        .setViewName("forward:/");
-                registry.addViewController("/{spring:\\w+}/**{spring:?!(\\.js|\\.css)$}")
+                registry.addViewController("/**/{spring:[^.]*}")
                         .setViewName("forward:/");
             }
         };
