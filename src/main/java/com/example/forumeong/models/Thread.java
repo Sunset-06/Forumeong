@@ -9,6 +9,7 @@ public class Thread {
     private String content;
     private String authorId;
     private String authorName;
+    private String pfpUrl;
     @ServerTimestamp
     private Timestamp created;
 
@@ -41,7 +42,7 @@ public class Thread {
     }
 
     public void setContent(String content) {
-        this.title = content;
+        this.content = content;
     }
 
     public String getAuthorId() {
@@ -58,6 +59,13 @@ public class Thread {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+    public String getPfpUrl() {
+        return pfpUrl;
+    }
+
+    public void setPfpUrl(String pfpUrl) {
+        this.pfpUrl = pfpUrl;
     }
 
     public Timestamp getCreated() {

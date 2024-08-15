@@ -14,9 +14,9 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class FirestoreService {
 
-    private static final String Users = "Users";
-    private static final String Threads = "Threads";
-    private static final String Posts= "Posts";
+    private static final String Users = "users";
+    private static final String Threads = "threads";
+    private static final String Posts= "posts";
 
 
     public String saveUser(User user) throws ExecutionException, InterruptedException {

@@ -38,7 +38,7 @@ Content-Type: application/json
 GET http://localhost:8080/api/threads/testthreadid
 
 ### Test Get All Threads
-GET http://localhost:8080/api/threads
+GET http://localhost:8080/api/threads/
 
 ### Test Delete Thread
 DELETE http://localhost:8080/api/threads/testthreadid
