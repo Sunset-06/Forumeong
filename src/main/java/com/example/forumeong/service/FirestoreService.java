@@ -8,6 +8,7 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -55,12 +56,14 @@ public class FirestoreService {
         return "User with ID " + userId + " has been deleted successfully.";
     }
 
+    //---------------------_--------Threads------------------------------------------------------
+
     public String saveThread(Thread thread) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        thread.setId(dbFirestore.collection(Threads).document().getId());
+        thread.setId(dbFirestore.collection("threads").document().getId());
 
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
-                .collection(Threads)
+                .collection("threads")
                 .document(thread.getId())
                 .set(thread);
 
@@ -70,7 +73,7 @@ public class FirestoreService {
 
     public Thread getThreadById(String threadId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = dbFirestore.collection(Threads).document(threadId);
+        DocumentReference documentReference = dbFirestore.collection("threads").document(threadId);
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
 
@@ -83,33 +86,43 @@ public class FirestoreService {
 
     public List<Thread> getAllThreads() throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        CollectionReference threads = dbFirestore.collection(Threads);
+        CollectionReference threads = dbFirestore.collection("threads");
         ApiFuture<QuerySnapshot> future = threads.get();
-        List<Thread> threadList = future.get().toObjects(Thread.class);
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+
+        List<Thread> threadList = new ArrayList<>();
+        
+        for (QueryDocumentSnapshot document : documents) {
+            Thread thread = document.toObject(Thread.class);
+            thread.setId(document.getId()); 
+            threadList.add(thread);
+        }
+
         return threadList;
     }
 
     public String deleteThread(String threadId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> result = dbFirestore.collection(Threads).document(threadId).delete();
+        ApiFuture<WriteResult> result = dbFirestore.collection("threads").document(threadId).delete();
         return "Thread with ID " + threadId + " has been deleted successfully.";
     }
 
-    public String savePost(Post post) throws ExecutionException, InterruptedException {
+    //----------------------------------Posts----------------------------------------------------------
+
+    public String savePost(String threadId, Post post) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
-                .collection(Posts)
-                .document(post.getId())
-                .set(post);
-        return collectionsApiFuture.get().getUpdateTime().toString();
+        DocumentReference postRef = dbFirestore.collection("threads").document(threadId).collection("posts").document();
+        post.setId(postRef.getId()); 
+        ApiFuture<WriteResult> collectionsApiFuture = postRef.set(post);
+        return postRef.getId(); 
     }
 
-    public Post getPostById(String postId) throws ExecutionException, InterruptedException {
+    public Post getPostById(String threadId, String postId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = dbFirestore.collection(Posts).document(postId);
-        ApiFuture<DocumentSnapshot> future = documentReference.get();
+        DocumentReference postRef = dbFirestore.collection("threads").document(threadId).collection("posts").document(postId);
+        ApiFuture<DocumentSnapshot> future = postRef.get();
         DocumentSnapshot document = future.get();
-
+    
         if (document.exists()) {
             return document.toObject(Post.class);
         } else {
@@ -117,18 +130,33 @@ public class FirestoreService {
         }
     }
 
-    public List<Post> getAllPosts() throws ExecutionException, InterruptedException {
+    public List<Post> getPostsByThreadId(String threadId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        CollectionReference posts = dbFirestore.collection(Posts);
+        CollectionReference posts = dbFirestore.collection("threads").document(threadId).collection("posts");
         ApiFuture<QuerySnapshot> future = posts.get();
         List<Post> postList = future.get().toObjects(Post.class);
         return postList;
     }
 
-    public String deletePost(String postId) throws ExecutionException, InterruptedException {
+    public String deletePost(String threadId, String postId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> result = dbFirestore.collection(Posts).document(postId).delete();
+        DocumentReference postRef = dbFirestore.collection("threads").document(threadId).collection("posts").document(postId);
+        ApiFuture<WriteResult> result = postRef.delete();
         return "Post with ID " + postId + " has been deleted successfully.";
+    }
+
+    public void updateThreadPostCount(String threadId) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference threadRef = dbFirestore.collection("threads").document(threadId);
+        DocumentSnapshot threadSnapshot = threadRef.get().get();
+    
+        if (threadSnapshot.exists()) {
+            Thread thread = threadSnapshot.toObject(Thread.class);
+            if (thread != null) {
+                int newPostCount = thread.getPostCount() + 1; // Increment post count
+                threadRef.update("postCount", newPostCount);
+            }
+        }
     }
 }
 

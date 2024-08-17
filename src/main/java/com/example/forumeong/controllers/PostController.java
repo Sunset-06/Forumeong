@@ -11,26 +11,28 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/api/posts/")
+@RequestMapping("/api/threads/{threadId}/posts")
 public class PostController {
 
     @Autowired
     private FirestoreService firestoreService;
 
     @PostMapping
-    public ResponseEntity<String> createPost(@RequestBody Post post) {
+    public ResponseEntity<String> createPost(@PathVariable String threadId, @RequestBody Post post) {
         try {
-            String response = firestoreService.savePost(post);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Post created at: " + response);
+            post.setId(firestoreService.savePost(threadId, post)); // Save post and get the document ID
+            // Optionally, update the thread's post count
+            firestoreService.updateThreadPostCount(threadId);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Post created with ID: " + post.getId());
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable String id) {
+    public ResponseEntity<Post> getPostById(@PathVariable String threadId, @PathVariable String id) {
         try {
-            Post post = firestoreService.getPostById(id);
+            Post post = firestoreService.getPostById(threadId, id);
             if (post != null) {
                 return ResponseEntity.ok(post);
             } else {
@@ -42,9 +44,9 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Post>> getAllPosts() {
+    public ResponseEntity<List<Post>> getPostsByThread(@PathVariable String threadId) {
         try {
-            List<Post> posts = firestoreService.getAllPosts();
+            List<Post> posts = firestoreService.getPostsByThreadId(threadId);
             return ResponseEntity.ok(posts);
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -52,9 +54,11 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePost(@PathVariable String id) {
+    public ResponseEntity<String> deletePost(@PathVariable String threadId, @PathVariable String id) {
         try {
-            String response = firestoreService.deletePost(id);
+            String response = firestoreService.deletePost(threadId, id);
+            // Optionally, update the thread's post count
+            firestoreService.updateThreadPostCount(threadId);
             return ResponseEntity.ok(response);
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());

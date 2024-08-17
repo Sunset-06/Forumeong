@@ -5,10 +5,8 @@ import com.google.cloud.Timestamp;
 
 public class Post {
     private String id;
-    private String threadId;
-    private String authorId;
     private String authorName;
-
+    private String pfpUrl;
     @ServerTimestamp
     private Timestamp created;
 
@@ -23,28 +21,20 @@ public class Post {
         this.id = id;
     }
 
-    public String getThreadId() {
-        return threadId;
-    }
-
-    public void setThreadId(String threadId) {
-        this.threadId = threadId;
-    }
-
-    public String getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
-    }
-
     public String getAuthorName() {
         return authorName;
     }
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public String getPfpUrl() {
+        return pfpUrl;
+    }
+
+    public void setPfpUrl(String pfpUrl) {
+        this.pfpUrl = pfpUrl;
     }
 
     public Timestamp getCreated() {
