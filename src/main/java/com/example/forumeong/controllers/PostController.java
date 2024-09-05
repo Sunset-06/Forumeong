@@ -20,8 +20,7 @@ public class PostController {
     @PostMapping
     public ResponseEntity<String> createPost(@PathVariable String threadId, @RequestBody Post post) {
         try {
-            post.setId(firestoreService.savePost(threadId, post)); // Save post and get the document ID
-            // Optionally, update the thread's post count
+            post.setId(firestoreService.savePost(threadId, post)); 
             firestoreService.updateThreadPostCount(threadId);
             return ResponseEntity.status(HttpStatus.CREATED).body("Post created with ID: " + post.getId());
         } catch (ExecutionException | InterruptedException e) {
@@ -57,7 +56,6 @@ public class PostController {
     public ResponseEntity<String> deletePost(@PathVariable String threadId, @PathVariable String id) {
         try {
             String response = firestoreService.deletePost(threadId, id);
-            // Optionally, update the thread's post count
             firestoreService.updateThreadPostCount(threadId);
             return ResponseEntity.ok(response);
         } catch (ExecutionException | InterruptedException e) {

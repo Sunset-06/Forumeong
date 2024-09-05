@@ -30,3 +30,6 @@ replay_pid*
 #firebase account key
 serviceAccountKey.json
 
+#test file
+Requests.rest
+

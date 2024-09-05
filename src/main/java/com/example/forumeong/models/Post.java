@@ -11,7 +11,6 @@ public class Post {
     private Timestamp created;
 
     private String content;
-    private int likes;
 
     public String getId() {
         return id;
@@ -53,11 +52,11 @@ public class Post {
         this.content = content;
     }
 
-    public int getLikes() {
+    /* public int getLikes() {
         return likes;
     }
 
     public void setLikes(int likes) {
         this.likes = likes;
-    }
+    } */
 }

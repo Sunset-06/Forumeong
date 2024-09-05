@@ -34,14 +34,9 @@ Content-Type: application/json
     "postCount": 0
 }
 
-### Test Get Thread By ID
-GET http://localhost:8080/api/threads/testthreadid
+### Test Get a Post in a Thread By ID
+GET http://localhost:8080/api/threads/eC8q25m9Y4myy3a2d87K/posts
 
-### Test Get All Threads
-GET http://localhost:8080/api/threads/
-
-### Test Delete Thread
-DELETE http://localhost:8080/api/threads/testthreadid
 
 ### Test Create Post
 POST http://localhost:8080/api/posts
