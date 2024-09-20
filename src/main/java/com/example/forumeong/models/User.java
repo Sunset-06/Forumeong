@@ -6,24 +6,22 @@ import com.google.cloud.Timestamp;
 public class User {
     private String id;
     private String username;
-    private String displayname;
     private String email;
     private String pfp;
 
     @ServerTimestamp
     private Timestamp created;
 
-    private String desc;
+    private String bio;
     private int postsCount;
     private int threadsCount;
 
-    public User(String id, String username, String email, String pfp, String desc, int postsCount, int threadsCount, String displayname) {
+    public User(String id, String username, String email, String pfp, String bio, int postsCount, int threadsCount) {
         this.id = id;
         this.username = username;
-        this.displayname = displayname;
         this.email = email;
         this.pfp = pfp;
-        this.desc = desc;
+        this.bio = bio;
         this.postsCount = postsCount;
         this.threadsCount = threadsCount;
     }
@@ -44,13 +42,6 @@ public class User {
         this.username = username;
     }
 
-    public String getDisplayname() {
-        return displayname;
-    }
-
-    public void setDisplayname(String displayname) {
-        this.displayname = displayname;
-    }
     public String getEmail() {
         return email;
     }
@@ -76,11 +67,11 @@ public class User {
     }
 
     public String getDesc() {
-        return desc;
+        return bio;
     }
 
-    public void setBio(String desc) {
-        this.desc = desc;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public int getPostsCount() {

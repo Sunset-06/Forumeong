@@ -3,13 +3,10 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-    "id": "testuserid",
     "username": "testname",
     "email": "test@email.com",
-    "pfp": "https://test.com/johndoe.jpg",
-    "desc": "A sample user",
-    "postsCount": 0,
-    "threadsCount": 0
+    "bio": "",
+    "pfp": ""
 }
 
 ### Test Get User By ID

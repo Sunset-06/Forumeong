@@ -16,12 +16,22 @@ public class UserController {
 
     @Autowired
     private FirestoreService firestoreService;
-
+    
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
-            String response = firestoreService.saveUser(user);
+            String response = firestoreService.createUser(user);
             return ResponseEntity.status(HttpStatus.CREATED).body("User created at: " + response);
+        } catch (ExecutionException | InterruptedException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable String id, @RequestBody User user) {
+        try {
+            String response = firestoreService.updateUser(id, user);
+            return ResponseEntity.ok("Thread updated at: " + response);
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }

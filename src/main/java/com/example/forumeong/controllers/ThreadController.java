@@ -17,11 +17,20 @@
         @Autowired
         private FirestoreService firestoreService;
 
-        @PostMapping
         public ResponseEntity<String> createThread(@RequestBody Thread thread) {
             try {
-                String response = firestoreService.saveThread(thread);
+                String response = firestoreService.createThread(thread);
                 return ResponseEntity.status(HttpStatus.CREATED).body("Thread created at: " + response);
+            } catch (ExecutionException | InterruptedException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+            }
+        }
+    
+        @PutMapping("/{id}")
+        public ResponseEntity<String> updateThread(@PathVariable String id, @RequestBody Thread thread) {
+            try {
+                String response = firestoreService.updateThread(id, thread);
+                return ResponseEntity.ok("Thread updated at: " + response);
             } catch (ExecutionException | InterruptedException e) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
             }

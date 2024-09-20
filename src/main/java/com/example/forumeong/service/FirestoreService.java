@@ -15,23 +15,27 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class FirestoreService {
 
-    private static final String Users = "users";
-    private static final String Threads = "threads";
-    private static final String Posts= "posts";
+    public String createUser(User user) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<DocumentReference> collectionsApiFuture = dbFirestore
+                .collection("users")
+                .add(user); 
+        DocumentReference documentReference = collectionsApiFuture.get();
+        return documentReference.getId(); 
+    }
 
-
-    public String saveUser(User user) throws ExecutionException, InterruptedException {
+    public String updateUser(String userId, User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
-                .collection(Users)
-                .document(user.getId())
-                .set(user);
+                .collection("users")
+                .document(userId)
+                .set(user, SetOptions.merge());
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
 
     public User getUserById(String userId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = dbFirestore.collection(Users).document(userId);
+        DocumentReference documentReference = dbFirestore.collection("users").document(userId);
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
 
@@ -44,7 +48,7 @@ public class FirestoreService {
 
     public List<User> getAllUsers() throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        CollectionReference users = dbFirestore.collection(Users);
+        CollectionReference users = dbFirestore.collection("users");
         ApiFuture<QuerySnapshot> future = users.get();
         List<User> userList = future.get().toObjects(User.class);
         return userList;
@@ -52,24 +56,29 @@ public class FirestoreService {
 
     public String deleteUser(String userId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> result = dbFirestore.collection(Users).document(userId).delete();
+        ApiFuture<WriteResult> result = dbFirestore.collection("users").document(userId).delete();
         return "User with ID " + userId + " has been deleted successfully.";
     }
 
     //---------------------_--------Threads------------------------------------------------------
 
-    public String saveThread(Thread thread) throws ExecutionException, InterruptedException {
+    public String createThread(Thread thread) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        thread.setId(dbFirestore.collection("threads").document().getId());
-
+        ApiFuture<DocumentReference> collectionsApiFuture = dbFirestore
+                .collection("thread")
+                .add(thread); 
+        DocumentReference documentReference = collectionsApiFuture.get();
+        return documentReference.getId(); 
+    }
+    
+    public String updateThread(String threadId, Thread thread) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
                 .collection("threads")
-                .document(thread.getId())
-                .set(thread);
-
+                .document(threadId)
+                .set(thread, SetOptions.merge());
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
-
 
     public Thread getThreadById(String threadId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
