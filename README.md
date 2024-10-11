@@ -12,7 +12,7 @@ All authentication is handled using Firebase client-side, you'll notice there is
 
 Read on to see how to get the project working, or to just know how it works.
 
-## The Firestore structure:
+## The Firestore structure
 There are two main documents that are expected in your firestore: `threads` and `users`.
 
 `threads` should have subdocuments called `posts` 
@@ -64,9 +64,16 @@ Transfer the contents of the frontend build directory to ```src/main/resources/s
 
 This makes testing a pain, so I recommend setting up your own testing environment, but I personally just chose to build it everytime I made some progress.
 
-## The service account key:
+## The service account key
 You need to add the account key that firebase provides [By default called serviceAccountKey.json] to your project. 
 Start working immediately by just adding it to the root directory
+
+
+## Starting the server
+
+Ensure you have Java 21 and Maven installed on your system. Maven shold take care of all the other dependencies for you.
+
+Next, you need to have the key to your service account. This is a json file that should be present in your root directory.
 
 The Firebase docs describe how to get the key
 
@@ -83,4 +90,8 @@ Finally, Start the dev server by using:
 ```bash
 mvn spring-boot:run
 ```
- 
+
+## Closing note
+I once read a medium article where the author stated that they did not have a closing note to add, so instead there was just a video of a samoyed eating a watermelon. I do not have a closing note either so here's a link to the same video:
+
+[ASMR Dog Eating Watermelon](https://www.youtube.com/watch?v=VRmksNNPua8)
