@@ -63,10 +63,7 @@ You can find the frontend repo for the project [here](https://github.com/Sunset-
 Transfer the contents of the frontend build directory to ```src/main/resources/static```
 
 This makes testing a pain, so I recommend setting up your own testing environment, but I personally just chose to build it everytime I made some progress.
-
-## The service account key
-You need to add the account key that firebase provides [By default called serviceAccountKey.json] to your project. 
-Start working immediately by just adding it to the root directory
+(I *really* recommend finding a better way to do it)
 
 
 ## Starting the server
