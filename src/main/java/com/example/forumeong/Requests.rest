@@ -3,14 +3,15 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-    "username": "testname",
+    "id": "imaginethatthisisanid",
+    "username": "superuser",
     "email": "test@email.com",
-    "bio": "",
+    "bio": "why, thank you",
     "pfp": ""
 }
 
 ### Test Get User By ID
-GET http://localhost:8080/api/users/testuserid
+GET http://localhost:8080/api/users/bzVnwYHlf1n03fY1EMhU 
 
 ### Test Get All Users
 GET http://localhost:8080/api/users

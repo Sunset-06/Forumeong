@@ -20,7 +20,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
-            String response = firestoreService.createUser(user);
+            String response = firestoreService.createUser(user, user.getId());
             return ResponseEntity.status(HttpStatus.CREATED).body("User created at: " + response);
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
@@ -31,7 +31,7 @@ public class UserController {
     public ResponseEntity<String> updateUser(@PathVariable String id, @RequestBody User user) {
         try {
             String response = firestoreService.updateUser(id, user);
-            return ResponseEntity.ok("Thread updated at: " + response);
+            return ResponseEntity.ok("User updated at: " + response);
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }

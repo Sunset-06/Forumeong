@@ -15,14 +15,15 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class FirestoreService {
 
-    public String createUser(User user) throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<DocumentReference> collectionsApiFuture = dbFirestore
-                .collection("users")
-                .add(user); 
-        DocumentReference documentReference = collectionsApiFuture.get();
-        return documentReference.getId(); 
-    }
+        public String createUser(User user, String userId) throws ExecutionException, InterruptedException {
+            Firestore dbFirestore = FirestoreClient.getFirestore();
+            ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
+                    .collection("users")
+                    .document(userId)
+                    .set(user); 
+            collectionsApiFuture.get();
+            return userId; 
+        }
 
     public String updateUser(String userId, User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -162,7 +163,7 @@ public class FirestoreService {
         if (threadSnapshot.exists()) {
             Thread thread = threadSnapshot.toObject(Thread.class);
             if (thread != null) {
-                int newPostCount = thread.getPostCount() + 1; // Increment post count
+                int newPostCount = thread.getPostCount() + 1; 
                 threadRef.update("postCount", newPostCount);
             }
         }

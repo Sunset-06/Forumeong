@@ -16,16 +16,6 @@ public class User {
     private int postsCount;
     private int threadsCount;
 
-    public User(String id, String username, String email, String pfp, String bio, int postsCount, int threadsCount) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.pfp = pfp;
-        this.bio = bio;
-        this.postsCount = postsCount;
-        this.threadsCount = threadsCount;
-    }
-
     public String getId() {
         return id;
     }
@@ -54,7 +44,7 @@ public class User {
         return pfp;
     }
 
-    public void setProfilePicture(String pfp) {
+    public void setPfp(String pfp) {
         this.pfp = pfp;
     }
 
@@ -66,7 +56,7 @@ public class User {
         this.created = created;
     }
 
-    public String getDesc() {
+    public String getBio() {
         return bio;
     }
 
