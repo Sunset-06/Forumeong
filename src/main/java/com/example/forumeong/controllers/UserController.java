@@ -20,7 +20,9 @@ public class UserController {
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
+            System.out.println("The Received user data: " + user); 
             String response = firestoreService.createUser(user, user.getId());
+            System.out.println("RESPONSE:::"+response);
             return ResponseEntity.status(HttpStatus.CREATED).body("User created at: " + response);
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());

@@ -3,15 +3,15 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-    "id": "imaginethatthisisanid",
-    "username": "superuser",
+    "id": "testuserid",
+    "username": "notsuperuser",
     "email": "test@email.com",
     "bio": "why, thank you",
-    "pfp": ""
+    "pfp": "src/assets/def-pfp.png"
 }
 
 ### Test Get User By ID
-GET http://localhost:8080/api/users/bzVnwYHlf1n03fY1EMhU 
+GET http://localhost:8080/api/users/fakeid
 
 ### Test Get All Users
 GET http://localhost:8080/api/users
@@ -34,23 +34,3 @@ Content-Type: application/json
 
 ### Test Get a Post in a Thread By ID
 GET http://localhost:8080/api/threads/eC8q25m9Y4myy3a2d87K/posts
-
-
-### Test Create Post
-POST http://localhost:8080/api/posts
-Content-Type: application/json
-
-{
-    "id": "testpostid",
-    "threadId": "testthread",
-    "authorId": "testuserid",
-    "content": "This is a test post.",
-}
-
-### Test Get Post By ID
-GET http://localhost:8080/api/posts/testpostid
-
-GET http://localhost:8080/api/posts
-
-### Test Delete Post
-DELETE http://localhost:8080/api/posts/testpostid

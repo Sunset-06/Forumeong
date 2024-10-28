@@ -17,11 +17,13 @@ public class FirestoreService {
 
         public String createUser(User user, String userId) throws ExecutionException, InterruptedException {
             Firestore dbFirestore = FirestoreClient.getFirestore();
+            System.out.println("Connected to firestore in service");
             ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
                     .collection("users")
                     .document(userId)
                     .set(user); 
             collectionsApiFuture.get();
+            System.out.println("User posted!!!!!!!!!");
             return userId; 
         }
 
