@@ -20,15 +20,17 @@ GET http://localhost:8080/api/users
 DELETE http://localhost:8080/api/users/testuserid
 
 ### Test Create Thread
-POST http://localhost:8080/api/threads
+POST http://localhost:8080/api/threads/
 Content-Type: application/json
 
 {
-    "id": "testthreadid",
+    "id": "sd7630ckkoskocrandomlol",
     "title": "Test Thread",
-    "authorId": "testuserid",
-    "authorName": "JohnDoe",
-    "category": "General",
+    "content": "",
+    "authorId": "sd7875sssdsdssrandomlol",
+    "authorName": "testusername",
+    "pfpUrl": "",
+    "category": "books",
     "postCount": 0
 }
 

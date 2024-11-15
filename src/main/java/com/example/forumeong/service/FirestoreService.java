@@ -17,13 +17,11 @@ public class FirestoreService {
 
         public String createUser(User user, String userId) throws ExecutionException, InterruptedException {
             Firestore dbFirestore = FirestoreClient.getFirestore();
-            System.out.println("Connected to firestore in service");
             ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
                     .collection("users")
                     .document(userId)
                     .set(user); 
             collectionsApiFuture.get();
-            System.out.println("User posted!!!!!!!!!");
             return userId; 
         }
 
@@ -63,14 +61,15 @@ public class FirestoreService {
         return "User with ID " + userId + " has been deleted successfully.";
     }
 
-    //---------------------_--------Threads------------------------------------------------------
+    //------------------------------Threads------------------------------------------------------
 
     public String createThread(Thread thread) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<DocumentReference> collectionsApiFuture = dbFirestore
-                .collection("thread")
+                .collection("threads")
                 .add(thread); 
         DocumentReference documentReference = collectionsApiFuture.get();
+        thread.setId(documentReference.getId()); 
         return documentReference.getId(); 
     }
     

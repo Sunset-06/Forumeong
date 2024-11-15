@@ -12,12 +12,10 @@ public class Thread {
     private String pfpUrl;
     @ServerTimestamp
     private Timestamp created;
-
     @ServerTimestamp
     private Timestamp updated;
     private String category;
     private int postCount;
-
     @ServerTimestamp
     private Timestamp lastPost;
     

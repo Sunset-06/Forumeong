@@ -17,6 +17,7 @@
         @Autowired
         private FirestoreService firestoreService;
 
+        @PostMapping
         public ResponseEntity<String> createThread(@RequestBody Thread thread) {
             try {
                 String response = firestoreService.createThread(thread);
