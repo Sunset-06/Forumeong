@@ -120,14 +120,18 @@ public class FirestoreService {
 
     //----------------------------------Posts----------------------------------------------------------
 
-    public String savePost(String threadId, Post post) throws ExecutionException, InterruptedException {
+    public String createPost(String threadId, Post post) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference postRef = dbFirestore.collection("threads").document(threadId).collection("posts").document();
-        post.setId(postRef.getId()); 
-        ApiFuture<WriteResult> collectionsApiFuture = postRef.set(post);
-        return postRef.getId(); 
+        DocumentReference postRef = dbFirestore
+                .collection("threads")
+                .document(threadId)
+                .collection("posts")
+                .document(); 
+        post.setId(postRef.getId());
+        ApiFuture<WriteResult> writeResult = postRef.set(post);
+        return postRef.getId();
     }
-
+    
     public Post getPostById(String threadId, String postId) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference postRef = dbFirestore.collection("threads").document(threadId).collection("posts").document(postId);

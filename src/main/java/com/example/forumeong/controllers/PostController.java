@@ -20,7 +20,7 @@ public class PostController {
     @PostMapping
     public ResponseEntity<String> createPost(@PathVariable String threadId, @RequestBody Post post) {
         try {
-            post.setId(firestoreService.savePost(threadId, post)); 
+            post.setId(firestoreService.createPost(threadId, post)); 
             firestoreService.updateThreadPostCount(threadId);
             return ResponseEntity.status(HttpStatus.CREATED).body("Post created with ID: " + post.getId());
         } catch (ExecutionException | InterruptedException e) {

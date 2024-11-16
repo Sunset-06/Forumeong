@@ -34,5 +34,17 @@ Content-Type: application/json
     "postCount": 0
 }
 
-### Test Get a Post in a Thread By ID
-GET http://localhost:8080/api/threads/eC8q25m9Y4myy3a2d87K/posts
+### Test Get all Posts in a Thread By ID
+GET http://localhost:8080/api/threads/EJVOqyxbikURoUI5nI70/posts
+
+### Test Add a post to a thread
+POST http://localhost:8080/api/threads/EJVOqyxbikURoUI5nI70/posts
+Content-Type: application/json
+
+{
+    "id": "",
+    "content": "some more more content ig",
+    "authorId": "sd7875sssdsdssrandomlol",
+    "authorName": "testusername",
+    "pfpUrl": ""
+}

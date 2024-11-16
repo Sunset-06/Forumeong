@@ -5,11 +5,11 @@ import com.google.cloud.Timestamp;
 
 public class Post {
     private String id;
+    private String authorId;
     private String authorName;
     private String pfpUrl;
     @ServerTimestamp
     private Timestamp created;
-
     private String content;
 
     public String getId() {
@@ -18,6 +18,14 @@ public class Post {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String aid) {
+        this.authorId = aid;
     }
 
     public String getAuthorName() {
@@ -52,6 +60,7 @@ public class Post {
         this.content = content;
     }
 
+    //I'm not too sure about adding likes
     /* public int getLikes() {
         return likes;
     }
