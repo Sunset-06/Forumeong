@@ -7,7 +7,7 @@ There are three endpoints: /users, /threads and /threads/posts
 
 All of these endpoints have their own crud operations and the data is stored in the Firestore database.
 
-All authentication is handled using Firebase client-side, you'll notice there is no authentication code here. On creating a user, the client-side code posts it into the database for future use.
+All authentication is handled using Firebase client-side, you'll notice there is no authentication code here. On creating a user at the client side, the server posts it into the database for future use.
 
 
 Read on to see how to get the project working, or to just know how it works.
@@ -24,7 +24,7 @@ post: {
     "id": String,
     "authorName": String,
     "pfpUrl": String,
-    "created": Server Timestamp,  // (In ISO 8601) 
+    "created": Server Timestamp,  
     "content": String
 }
 
@@ -35,11 +35,11 @@ thread: {
     "authorId": String,
     "authorName": String,
     "pfpUrl": String,
-    "created": Server Timestamp,  // (In ISO 8601) 
-    "updated": Server Timestamp,  // (In ISO 8601) 
+    "created": Server Timestamp,  
+    "updated": Server Timestamp,  
     "category": String,
     "postCount": int,
-    "lastPost": Server Timestamp,  // (In ISO 8601) 
+    "lastPost": Server Timestamp,  
 }
 
 user: {
@@ -47,7 +47,7 @@ user: {
     "username": String,
     "email": String,
     "pfpUrl": String,
-    "created": Server Timestamp,  // (In ISO 8601) 
+    "created": Server Timestamp,  
     "bio": String,
     "postsCount": int,
     "threadsCount": int

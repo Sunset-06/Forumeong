@@ -4,7 +4,7 @@ public class User {
     private String id;
     private String username;
     private String email;
-    private String pfp;
+    private String pfpUrl;
     private String bio;
     
     public String getId() {
@@ -31,12 +31,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPfp() {
-        return pfp;
+    public String getPfpUrl() {
+        return pfpUrl;
     }
 
-    public void setPfp(String pfp) {
-        this.pfp = pfp;
+    public void setPfpUrl(String pfp) {
+        this.pfpUrl = pfp;
     }
 
     public String getBio() {

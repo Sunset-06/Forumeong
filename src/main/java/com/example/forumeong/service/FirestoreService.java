@@ -30,7 +30,10 @@ public class FirestoreService {
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
                 .collection("users")
                 .document(userId)
-                .set(user, SetOptions.merge());
+                .update(
+                    "username", user.getUsername(),
+                    "bio", user.getBio()
+                );
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
 

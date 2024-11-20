@@ -27,7 +27,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable String id, @RequestBody User user) {
         try {
             String response = firestoreService.updateUser(id, user);
