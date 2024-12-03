@@ -13,7 +13,7 @@ import java.io.IOException;
 @Configuration
 public class firebaseConfig {
 
-    @Value("serviceAccountKey.json")
+    @Value("/etc/secrets/serviceAccountKey.json")
     private String firebasePath;
 
     @Bean
