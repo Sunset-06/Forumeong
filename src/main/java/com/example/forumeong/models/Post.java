@@ -10,6 +10,7 @@ public class Post {
     private String pfpUrl;
     @ServerTimestamp
     private Timestamp created;
+    private String quoting;
     private String content;
 
     public String getId() {
@@ -51,7 +52,15 @@ public class Post {
     public void setCreated(Timestamp created) {
         this.created = created;
     }
+    
+    public String getQuoting() {
+        return quoting;
+    }
 
+    public void setQuoting(String quoting) {
+        this.quoting = quoting;
+    }
+    
     public String getContent() {
         return content;
     }

@@ -1,13 +1,11 @@
-FROM eclipse-temurin:21-jre-jammy
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-COPY .mvn/ .mvn/
+COPY target/Forumeong-0.0.1-SNAPSHOT.jar ./app.jar
 
-COPY mvnw pom.xml ./
+COPY serviceAccountKey.json ./
 
-RUN ./mvnw dependency:go-offline
+EXPOSE 8080
 
-COPY src ./src
-
-CMD ["./mvnw", "spring-boot:run"]
+CMD ["java","-jar","app.jar"]
