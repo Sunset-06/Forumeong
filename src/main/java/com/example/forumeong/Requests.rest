@@ -7,7 +7,7 @@ Content-Type: application/json
     "username": "notsuperuser",
     "email": "test@email.com",
     "bio": "why, thank you",
-    "pfp": "src/assets/def-pfp.png"
+    "pfpUrl": "/images/pfp-1.jpg"
 }
 
 ### Test Get User By ID
