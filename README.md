@@ -26,7 +26,7 @@ Read on to see how to get the project working, or to just know how it works.
 
 These instructions are for contributing or getting it running for the first time. Before working on it, understand how the application expects the database:
 
-- ### The Firestore structure
+### The Firestore structure
 There are two main documents that are expected in your firestore: `threads` and `users`.
 
 `threads` should have subdocuments called `posts` 
@@ -70,7 +70,8 @@ user: {
 ```
 Once you make your changes, connect the frontend to the application:
 
-- ### Connecting the Frontend
+
+## Connecting the Frontend
 
 You can find the frontend repo for the project [here](https://github.com/Sunset-06/Forum-Frontend)
 
@@ -81,7 +82,7 @@ This makes testing a pain, so I recommend setting up your own testing environmen
 (An alternative way is to just create an extra path to test out the frontend elements, which is what I eventually ended up doing, but this discussion is a little out of topic for this document.)
 
 
-- ### Starting the server
+## Starting the server
 
 Ensure you have Java 21 and Maven installed on your system. Maven shold take care of all the other dependencies for you.
 
@@ -110,14 +111,14 @@ Finally, Start the dev server by using:
 mvn spring-boot:run
 ```
 
-- ### The pipeline
+## The pipeline
 The pipeline does the following in order:
 - Set up java in the container
 - Build the .jar file
 - Push the image to dockerhub
 - Use Render Deployhook to send a redeploy message to Render, the service that I have this currently deployed on.
 
-- ### Testing
+## Testing
 The current functions are all unit tested, and for testing the http requests, I have used the [VSCode REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), and recommend using that as well. 
 If you do not use VSCode, a simple curl request works as well.
 
