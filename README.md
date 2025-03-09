@@ -117,6 +117,12 @@ The pipeline does the following in order:
 - Push the image to dockerhub
 - Use Render Deployhook to send a redeploy message to Render, the service that I have this currently deployed on.
 
+- ### Testing
+The current functions are all unit tested, and for testing the http requests, I have used the [VSCode REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), and recommend using that as well. 
+If you do not use VSCode, a simple curl request works as well.
+
+There are unfortunately no integration tests for the client side of the site, that needs to be done manually as of now.
+
 ## 🛡 License
 
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
